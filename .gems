@@ -1,0 +1,1 @@
+ruby-openid --version ">= 2.0.4"
