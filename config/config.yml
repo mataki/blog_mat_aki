@@ -1,0 +1,11 @@
+# This file was auto-generated.  Feel free to customize it to your whim.
+
+production:
+  identity_url: "https://id.mixi.jp/1770631"
+
+development:
+  identity_url: "http://localhost:3333/user/mat_aki"
+
+test:
+  identity_url: "http://localhost:3333/user/mat_aki"
+

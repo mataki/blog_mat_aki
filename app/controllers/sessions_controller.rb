@@ -17,7 +17,7 @@ protected
 
   def open_id_authentication
     authenticate_with_open_id do |result, identity_url|
-      if result.successful? && identity_url == "http://localhost:3333/user/mat_aki"
+      if result.successful? && identity_url == configatron.identity_url
         reset_session
         session[:login] = :true
         redirect_to(root_url)
