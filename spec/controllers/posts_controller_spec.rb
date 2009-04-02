@@ -5,7 +5,7 @@ describe PostsController do
   def mock_post(stubs={})
     @mock_post ||= mock_model(Post, stubs)
   end
-  
+
   describe "GET index" do
 
     it "exposes all posts as @posts" do
@@ -15,14 +15,14 @@ describe PostsController do
     end
 
     describe "with mime type of xml" do
-  
+
       it "renders all posts as xml" do
         Post.should_receive(:find).with(:all).and_return(posts = mock("Array of Posts"))
         posts.should_receive(:to_xml).and_return("generated XML")
         get :index, :format => 'xml'
         response.body.should == "generated XML"
       end
-    
+
     end
 
   end
@@ -34,7 +34,7 @@ describe PostsController do
       get :show, :id => "37"
       assigns[:post].should equal(mock_post)
     end
-    
+
     describe "with mime type of xml" do
 
       it "renders the requested post as xml" do
@@ -45,12 +45,13 @@ describe PostsController do
       end
 
     end
-    
+
   end
 
   describe "GET new" do
-  
+
     it "exposes a new post as @post" do
+      admin_login
       Post.should_receive(:new).and_return(mock_post)
       get :new
       assigns[:post].should equal(mock_post)
@@ -59,8 +60,9 @@ describe PostsController do
   end
 
   describe "GET edit" do
-  
+
     it "exposes the requested post as @post" do
+      admin_login
       Post.should_receive(:find).with("37").and_return(mock_post)
       get :edit, :id => "37"
       assigns[:post].should equal(mock_post)
@@ -69,9 +71,12 @@ describe PostsController do
   end
 
   describe "POST create" do
+    before do
+      admin_login
+    end
 
     describe "with valid params" do
-      
+
       it "exposes a newly created post as @post" do
         Post.should_receive(:new).with({'these' => 'params'}).and_return(mock_post(:save => true))
         post :create, :post => {:these => 'params'}
@@ -83,9 +88,9 @@ describe PostsController do
         post :create, :post => {}
         response.should redirect_to(post_url(mock_post))
       end
-      
+
     end
-    
+
     describe "with invalid params" do
 
       it "exposes a newly created but unsaved post as @post" do
@@ -99,12 +104,15 @@ describe PostsController do
         post :create, :post => {}
         response.should render_template('new')
       end
-      
+
     end
-    
+
   end
 
   describe "PUT udpate" do
+    before do
+      admin_login
+    end
 
     describe "with valid params" do
 
@@ -127,7 +135,7 @@ describe PostsController do
       end
 
     end
-    
+
     describe "with invalid params" do
 
       it "updates the requested post" do
@@ -153,13 +161,16 @@ describe PostsController do
   end
 
   describe "DELETE destroy" do
+    before do
+      admin_login
+    end
 
     it "destroys the requested post" do
       Post.should_receive(:find).with("37").and_return(mock_post)
       mock_post.should_receive(:destroy)
       delete :destroy, :id => "37"
     end
-  
+
     it "redirects to the posts list" do
       Post.stub!(:find).and_return(mock_post(:destroy => true))
       delete :destroy, :id => "1"
@@ -168,4 +179,7 @@ describe PostsController do
 
   end
 
+  def admin_login
+    session[:login] = :true
+  end
 end
