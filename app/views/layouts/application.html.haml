@@ -4,21 +4,65 @@
   %head
     %meta{ :content => "text/html;charset=UTF-8", "http-equiv" => "content-type" }
     %title
-      Posts:
       = controller.action_name
+      blog.mat-aki.net
     = javascript_include_tag :defaults
     = stylesheet_link_tag 'scaffold'
+    = stylesheet_link_tag 'style'
     = stylesheet_link_tag "application"
     = stylesheet_link_tag "blitzer/jquery-ui-1.7.1.custom.css"
   %body
-    - if flash[:notice]
-      .ui-state-highlight.ui-corner-all
-        %p
-          %span.ui-icon.ui-icon-info.label-icon
-          = flash[:notice]
-    - if flash[:error]
-      .ui-state-error.ui-corner-all
-        %p
-          %span.ui-icon.ui-icon-alert.label-icon
-          = flash[:error]
-    = yield
+    #wrapper
+      #header
+        #menu
+          %ul
+            %li.current_page_item
+              = link_to "Home", root_path
+            %li
+              = link_to "About me", root_path
+        #search
+    #page
+      #flash
+        - if flash[:notice]
+          .ui-state-highlight.ui-corner-all
+            %p
+              %span.ui-icon.ui-icon-info.label-icon
+                = flash[:notice]
+        - if flash[:error]
+          .ui-state-error.ui-corner-all
+            %p
+              %span.ui-icon.ui-icon-alert.label-icon
+                = flash[:error]
+      #content
+        = yield
+      #sidebar
+        #logo
+          %h1
+            = link_to "Blog.mat-aki.net", root_path
+          %p
+            template design by
+            = link_to "Free CSS Templates", "http://www.freecsstemplates.org/"
+        %ul
+          %li
+            %h2
+              Link
+            %ul
+              %li
+                = link_to "SonicGarden", "http://www.sonicgarden.jp"
+              %li
+                = link_to "OpenSKIP", "http://www.openskip.org"
+          %li
+            %h2
+              Profile
+            %ul
+              %li
+                = link_to "Old Blog", "http://d.hatena.ne.jp/mat_aki"
+              %li
+                = link_to "github.com", "http://www.github.com/mataki"
+      .clear
+        &nbsp;
+    #bottom-bg
+      = image_tag("/stylesheets/images/img07.gif")
+    #footer
+      %p
+        Copyright (c) 2008 blog.mat-aki.com. All rights reserved. Design by <a href="http://www.freecsstemplates.org/">Free CSS Templates</a>.
