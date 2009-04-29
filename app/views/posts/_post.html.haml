@@ -1,0 +1,10 @@
+.post
+  %h2.title
+    = h post.title
+  %p.date
+    = h post.updated_at.to_s(:post)
+  .entry
+    %p
+      = h post.body
+    %p.links
+      = link_to "See original", post
