@@ -5,6 +5,6 @@
     = h post.updated_at.to_s(:post)
   .entry
     %p
-      = h post.body
+      = PikiDoc.to_xhtml post.body
     %p.links
       = link_to "See original", post

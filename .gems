@@ -1,2 +1,3 @@
 ruby-openid --version ">= 2.0.4"
 configatron
+moro-piki_doc

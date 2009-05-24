@@ -25,14 +25,14 @@
       #flash
         - if flash[:notice]
           .ui-state-highlight.ui-corner-all
+            %p.ui-icon.ui-icon-info.label-icon
             %p
-              %span.ui-icon.ui-icon-info.label-icon
-                = flash[:notice]
+              = flash[:notice]
         - if flash[:error]
           .ui-state-error.ui-corner-all
+            %p.ui-icon.ui-icon-alert.label-icon
             %p
-              %span.ui-icon.ui-icon-alert.label-icon
-                = flash[:error]
+              = flash[:error]
       #content
         = yield
       #sidebar
